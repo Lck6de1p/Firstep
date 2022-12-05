@@ -1,31 +1,43 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
+import { ref, provide, onMounted } from "vue";
+import { NButton } from "naive-ui";
+import Renderer from "@/components/Renderer/index.vue";
+import Preview from "@/components/Preview/index.vue";
+import { config } from "./config";
+
+const formData = ref<any>({ input: "", select: "" });
+provide("formData", formData);
+
+const setFormDataByKey = (key: string, value: any) => {
+  formData.value[key] = value;
+  console.log(formData.value);
+};
+provide("setFormDataByKey", setFormDataByKey);
+
+const renderer = ref<InstanceType<typeof Renderer> | null>(null);
+const handleClickSave = () => {
+ console.log( renderer.value?.validate());
+};
 </script>
 
 <template>
   <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <n-button type="primary" @click="handleClickSave">保存</n-button>
   </div>
-  <HelloWorld msg="Vite + Vue" />
+  <div class="container">
+    <Preview :formData="formData" />
+    <div class="renderer-wrapper">
+      <Renderer :config="config" ref="renderer" />
+    </div>
+  </div>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
+<style lang="less" scoped>
+.container {
+  display: flex;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.renderer-wrapper {
+  flex: 1;
+  padding: 16px;
 }
 </style>
