@@ -10,13 +10,12 @@ provide("formData", formData);
 
 const setFormDataByKey = (key: string, value: any) => {
   formData.value[key] = value;
-  console.log(formData.value);
 };
 provide("setFormDataByKey", setFormDataByKey);
 
 const renderer = ref<InstanceType<typeof Renderer> | null>(null);
 const handleClickSave = () => {
- console.log( renderer.value?.validate());
+  console.log(renderer.value?.validate());
 };
 </script>
 

@@ -17,6 +17,7 @@
 import { ref } from "vue";
 import { NTabs, NTabPane } from "naive-ui";
 import TabForm from "./components/TabForm.vue";
+import { useRefList } from "@/hooks/useRefsList";
 
 interface Props {
   config: any;
@@ -27,34 +28,10 @@ const initValue = Object.entries(props.config)[0][0];
 const tabValue = ref<number | string>(initValue);
 const config = ref(props.config);
 
-type tabFormRef = {
-  key: string | number;
-  el: InstanceType<typeof TabForm>;
+const cb = (key: string | number) => {
+  tabValue.value = key;
 };
-
-const refs = ref<tabFormRef[]>([]);
-
-const getRef = (key: string | number, el: any) => {
-  if (
-    !refs.value.some((v) => {
-      return v.key === key;
-    })
-  ) {
-    refs.value.push({ key, el });
-  }
-};
-
-const validate = () => {
-  const refsList = Object.entries(refs.value);
-  for (const [, { key, el }] of refsList) {
-    const isSuccess = el?.validate();
-    if (!isSuccess) {
-      tabValue.value = key;
-      return false;
-    }
-  }
-  return true;
-};
+const { refs, getRef, validate } = useRefList(TabForm, cb);
 
 defineExpose({
   validate,
