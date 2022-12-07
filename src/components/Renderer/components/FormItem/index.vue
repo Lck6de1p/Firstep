@@ -16,15 +16,18 @@
         />
       </component>
     </div>
-    <!-- <div>error</div> -->
+    <error-msg :error-msg="errorMsg" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, inject } from "vue";
-import { useGetComponent } from "./components/useGetComponent";
-import { SubProps, StringAnyType, Options } from "../types";
-import { cmpType } from "./components";
+import ErrorMsg from "./ErrorMsg.vue";
+import { useGetComponent } from "../components/useGetComponent";
+import { SubProps, StringAnyType, Options } from "../../types";
+import { cmpType } from "../components";
+import { useValidate } from "./useValidate";
+
 interface Props {
   propKey: string | number;
   config: SubProps;
@@ -68,19 +71,18 @@ const subCmpOptions = computed(() => {
 });
 
 const formData: any = inject("formData");
-
 const modifyValue = computed(() => {
-  return formData[props.propKey];
+  return formData.value[props.propKey];
 });
 
 const setFormDataByKey: any = inject("setFormDataByKey");
 const handleInput = (e: any) => {
   setFormDataByKey(props.propKey, e);
+  validate();
 };
 
-const validate = () => {
-  return false;
-};
+const { validate, errorMsg } = useValidate(props.config.rules, modifyValue);
+
 defineExpose({
   validate,
 });

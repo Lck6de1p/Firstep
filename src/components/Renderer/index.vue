@@ -6,6 +6,7 @@
         :key="key"
         :name="key"
         :tab="value.title"
+        display-directive="show"
       >
         <TabForm :config="value.content" :ref="(el) => getRef(key, el)" />
       </n-tab-pane>
@@ -31,7 +32,7 @@ const config = ref(props.config);
 const cb = (key: string | number) => {
   tabValue.value = key;
 };
-const { refs, getRef, validate } = useRefList(TabForm, cb);
+const { getRef, validate } = useRefList(TabForm, cb);
 
 defineExpose({
   validate,

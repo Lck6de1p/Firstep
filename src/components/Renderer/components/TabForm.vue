@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import FormItem from "./FormItem.vue";
+import FormItem from "./FormItem/index.vue";
 import { SubProps } from "../types";
 import { useRefList } from "@/hooks/useRefsList";
 interface Config {
