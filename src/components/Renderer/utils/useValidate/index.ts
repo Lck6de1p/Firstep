@@ -1,6 +1,6 @@
 import { ref, unref } from "vue";
-import { SubProps, RuleRequiredType, RulePatternType, RuleType } from '../types';
-import { useShowFormItem } from './useShowFormItem';
+import { SubProps, RuleRequiredType, RulePatternType, RuleType } from '../../types';
+import { useShowFormItem } from '../useShowFormItem';
 
 function isRuleRequiredType(rule: RuleType): rule is RuleRequiredType {
   return (rule as RuleRequiredType).required !== undefined
@@ -13,30 +13,21 @@ function isRulePatternType(rule: RuleType): rule is RulePatternType {
 export function useValidate(config: SubProps, value: any, formData: any) {
   const { rules, dependence } = config;
   const errorMsg = ref<string>('');
-  const isRequired = ref(Array.isArray(rules) ?
-    rules.some(v => isRuleRequiredType(v))
-    : rules ? isRuleRequiredType(rules)
-      : false
-  )
+  const _rules = Array.isArray(rules) ? rules : rules ? [rules] : [];
+  const isRequired = _rules.some(v => isRuleRequiredType(v));
+
   const validate = () => {
-    if (dependence) {
-      if (!useShowFormItem(config, formData)) {
-        return true;
-      }
-    }
-    if (!rules) {
+    if (dependence && !useShowFormItem(config, formData)) {
       return true;
     }
-    if (Array.isArray(rules)) {
-      for (let i = 0; i < rules.length; i++) {
-        const rule = rules[i];
-        if (!validateOneRule(rule, value)) {
-          return false;
-        }
-      }
+    if (!_rules.length) {
+      return true;
     }
-    else {
-      if (!validateOneRule(rules, value)) return false;
+    for (let i = 0; i < _rules.length; i++) {
+      const rule = _rules[i];
+      if (!validateOneRule(rule, value)) {
+        return false;
+      }
     }
     errorMsg.value = "";
     return true;
@@ -65,7 +56,6 @@ export function useValidate(config: SubProps, value: any, formData: any) {
 
     return true;
   }
-
 
   return { validate, errorMsg, isRequired }
 }
