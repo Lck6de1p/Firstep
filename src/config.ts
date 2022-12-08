@@ -17,6 +17,10 @@ export const config = {
         type: 'input',
         value: "",
         props: {},
+        dependence: {
+          label: 'input',
+          value: '12'
+        },
         rules: [{
           required: true,
           message: "请输入标题2"
