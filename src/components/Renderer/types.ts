@@ -34,3 +34,10 @@ export type SubProps = {
   props: any
   rules?: RulesType
 }
+
+type TabProps = {
+  title: string,
+  content: Record<string, SubProps>
+}
+
+export type Config = Record<string, TabProps>

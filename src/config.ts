@@ -1,4 +1,6 @@
-export const config = {
+import { Config } from "./components/Renderer/types";
+
+export const config: Config = {
   baseConfig: {
     title: "基础配置",
     content: {
@@ -38,7 +40,6 @@ export const config = {
             { value: 'lckTest4', label: 'lckLabel4' },
           ]
         },
-        rules: {},
       },
       checkbox: {
         label: "checkbox",
@@ -52,7 +53,6 @@ export const config = {
             { value: 'lckTest4', label: 'lckLabel4' },
           ]
         },
-        rules: {},
       },
     },
   },

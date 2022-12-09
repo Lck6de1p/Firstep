@@ -19,9 +19,10 @@ import { ref } from "vue";
 import { NTabs, NTabPane } from "naive-ui";
 import TabForm from "./components/TabForm.vue";
 import { useRefList } from "@/hooks/useRefsList";
+import { Config } from "./types";
 
 interface Props {
-  config: any;
+  config: Config;
 }
 
 const props = defineProps<Props>();
