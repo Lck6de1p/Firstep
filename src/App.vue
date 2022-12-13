@@ -1,17 +1,14 @@
 <template>
   <div id="app">
-    <n-config-provider :theme="theme">
+    <application>
       <router-view />
-    </n-config-provider>
+    </application>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { darkTheme, NConfigProvider } from "naive-ui";
-import type { GlobalTheme } from "naive-ui";
+import Application from '@/components/Application/index.vue';
 
-const theme = ref<GlobalTheme | null>(null);
 </script>
 
 <style lang="less" scoped>
