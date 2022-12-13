@@ -3,7 +3,9 @@
     <n-layout-sider class="layout-sider">
       <sider-menu />
     </n-layout-sider>
-    <router-view />
+    <div class="layout-body">
+      <router-view />
+    </div>
   </n-layout>
 </template>
 
@@ -25,6 +27,11 @@ const fixedMenu = computed(() => {
     position: relative;
     z-index: 13;
     transition: all 0.2s ease-in-out;
+  }
+  &-body {
+    flex: auto;
+    padding: 16px;
+    min-height: 100vh;
   }
 }
 </style>
