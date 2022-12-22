@@ -2,12 +2,14 @@
   <n-menu
     :options="menuOptions"
     accordion
-    :value="routerKey"
+    :value="activeKey"
+    :expanded-keys="expandedKeys"
     @update:value="clickMenuItem"
+    @update:expanded-keys="handleUpdateExpandedKeys"
   />
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, computed, watch } from "vue";
 import { NMenu } from "naive-ui";
 import type { MenuOption } from "naive-ui";
 import { routeModuleList } from "@/router/index";
@@ -29,19 +31,31 @@ const genMenu = (moduleList: RouteRecordRaw[]) => {
 };
 
 const menuOptions: MenuOption[] = genMenu(routeModuleList);
-const routerKey = ref("");
 const router = useRouter();
-const currentRoute = useRoute();
-
 
 function clickMenuItem(val: string) {
-  routerKey.value = val;
   router.push({
     path: val,
   });
 }
-onMounted(() => {
-  routerKey.value = currentRoute.path;
-  
+
+
+const route = useRoute();
+const activeKey = computed(() => {
+  return route.path;
 });
+
+const expandedKeys = ref<string[]>([]);
+function handleUpdateExpandedKeys(keys: string[]) {
+  expandedKeys.value = keys;
+}
+watch(
+  () => route.path,
+  () => {
+    expandedKeys.value = route.path.split("/").map((v) => {
+      return `/${v}`;
+    });
+  },
+  { immediate: true }
+);
 </script>
