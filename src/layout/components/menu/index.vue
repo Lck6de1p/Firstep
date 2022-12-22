@@ -13,7 +13,8 @@ import { ref, computed, watch } from "vue";
 import { NMenu } from "naive-ui";
 import type { MenuOption } from "naive-ui";
 import { routeModuleList } from "@/router/index";
-import { RouteRecordRaw, useRouter, useRoute } from "vue-router";
+import { RouteRecordRaw } from "vue-router";
+import { useRouterPush } from "@/hooks/router";
 const genMenu = (moduleList: RouteRecordRaw[]) => {
   const menu: MenuOption[] = [];
   for (let module of moduleList) {
@@ -31,16 +32,11 @@ const genMenu = (moduleList: RouteRecordRaw[]) => {
 };
 
 const menuOptions: MenuOption[] = genMenu(routeModuleList);
-const router = useRouter();
-
+const { routerPush, route } = useRouterPush();
 function clickMenuItem(val: string) {
-  router.push({
-    path: val,
-  });
+  routerPush(val);
 }
 
-
-const route = useRoute();
 const activeKey = computed(() => {
   return route.path;
 });
