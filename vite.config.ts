@@ -1,12 +1,10 @@
 /// <reference types="vitest" />
 
 import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
-
+import { setupVitePlugins } from './build/plugins';
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
   test: {
     exclude: [
       "**/node_modules/**",
@@ -17,6 +15,7 @@ export default defineConfig({
       "**/components/Counter.spec.tsx",
     ],
   },
+  plugins: setupVitePlugins(),
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),

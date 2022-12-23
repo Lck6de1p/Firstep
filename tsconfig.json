@@ -29,8 +29,10 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
-, "src/config.js", "src/components/Renderer/components/components/index.js"  ],
+    "src/**/*.vue",
+    "src/config.js",
+    "src/components/Renderer/components/components/index.js"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

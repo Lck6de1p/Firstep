@@ -1,7 +1,7 @@
 <template>
   <n-data-table
     :columns="columns"
-    :data="data"
+    :data="props.data"
     :pagination="pagination"
     :bordered="false"
   />
@@ -25,41 +25,39 @@ const createColumns = ({
 }): DataTableColumns<Song> => {
   return [
     {
-      title: "No",
-      key: "no",
+      title: "id",
+      key: "id",
     },
     {
-      title: "Title",
-      key: "title",
+      title: "userName",
+      key: "userName",
     },
     {
-      title: "Length",
-      key: "length",
+      title: "age",
+      key: "age",
     },
     {
-      title: "Action",
-      key: "actions",
-      render(row) {
-        return h(
-          NButton,
-          {
-            strong: true,
-            tertiary: true,
-            size: "small",
-            onClick: () => play(row),
-          },
-          { default: () => "Play" }
-        );
-      },
+      title: "gender",
+      key: "gender",
     },
+  
+    {
+      title: "phone",
+      key: "phone",
+    },
+  
+    {
+      title: "email",
+      key: "email",
+    },
+  
   ];
 };
 
-const data: Song[] = [
-  { no: 3, title: "Wonderwall", length: "4:18" },
-  { no: 4, title: "Don't Look Back in Anger", length: "4:48" },
-  { no: 12, title: "Champagne Supernova", length: "7:27" },
-];
+type Props = {
+  data: any[]
+}
+const props = defineProps<Props>()
 
 const message = useMessage();
 const columns = ref(
