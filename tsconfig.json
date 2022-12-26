@@ -31,7 +31,9 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "src/config.js",
-    "src/components/Renderer/components/components/index.js"
+    "src/components/Renderer/components/components/index.js",
+    "src/components/**/*.ts",
+    "src/components/**/*.vue",
   ],
   "references": [
     {

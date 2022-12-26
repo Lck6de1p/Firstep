@@ -2,13 +2,13 @@ import { RouteRecordRaw } from 'vue-router';
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/list',
-    name: 'list',
-    component: () => import('@/views/list/index.vue'),
+    path: '/form',
+    name: 'form',
+    component: () => import('@/views/form/index.vue'),
     meta: {
       sort: 9,
       isRoot: true,
-      title: "列表"
+      title: "表单"
     },
   },
 ];

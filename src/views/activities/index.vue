@@ -1,5 +1,17 @@
+<template>
+  <div>
+    <n-button type="primary" @click="handleClickSave">保存</n-button>
+  </div>
+  <div class="container">
+    <Preview :formData="formData" />
+    <div class="renderer-wrapper">
+      <Renderer :config="config" ref="renderer" />
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
-import { ref, provide, onMounted } from "vue";
+import { ref, provide } from "vue";
 import { NButton } from "naive-ui";
 import Renderer from "@/components/Renderer/index.vue";
 import Preview from "@/components/Preview/index.vue";
@@ -18,18 +30,6 @@ const handleClickSave = () => {
   console.log(renderer.value?.validate());
 };
 </script>
-
-<template>
-  <div>
-    <n-button type="primary" @click="handleClickSave">保存</n-button>
-  </div>
-  <div class="container">
-    <Preview :formData="formData" />
-    <div class="renderer-wrapper">
-      <Renderer :config="config" ref="renderer" />
-    </div>
-  </div>
-</template>
 
 <style lang="less" scoped>
 .container {
