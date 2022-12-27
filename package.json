@@ -43,11 +43,12 @@
     "vitest": "^0.25.5",
     "vue-tsc": "^1.0.9"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
-    "*.{js,vue,jsx,tsx,ts}": [
-      "prettier --write",
-      "eslint --cache --fix",
-      "git add"
-    ]
+    "*.js": "eslint --fix"
   }
 }
