@@ -10,6 +10,7 @@
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
     "format": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\"",
     "prepare": "husky install",
+    "lint-staged": "lint-staged",
     "test-ct": "playwright test -c playwright-ct.config.ts",
     "test": "vitest run",
     "test:watch": "vitest"
@@ -32,6 +33,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.8.0",
     "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
     "mockjs": "^1.1.0",
     "naive-ui": "^2.34.2",
     "prettier": "^2.8.1",
@@ -40,5 +42,12 @@
     "vite-plugin-mock": "^2.9.6",
     "vitest": "^0.25.5",
     "vue-tsc": "^1.0.9"
+  },
+  "lint-staged": {
+    "*.{js,vue,jsx,tsx,ts}": [
+      "prettier --write",
+      "eslint --cache --fix",
+      "git add"
+    ]
   }
 }
