@@ -2,7 +2,8 @@
   <div class="form-item" v-show="isShow">
     <div class="form-item-label">
       <span v-if="isRequired">*</span>
-      {{ props.config.label }}:</div>
+      {{ props.config.label }}:
+    </div>
     <div class="form-item-blank">
       <div class="form-item-content">
         <component
@@ -13,21 +14,22 @@
           :on-update:value="handleInput"
         >
           <component
-            v-for="item in subCmpOptions.options"
+            v-for="(item, index) in subCmpOptions.options"
             :is="useGetComponent(subCmpOptions.type)"
+            :key="index"
             :value="item.value"
             :label="item.label"
           />
         </component>
       </div>
-      <error-msg :error-msg="errorMsg" />
+      <error-msg-tips :error-msg="errorMsg" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, inject } from "vue";
-import ErrorMsg from "./ErrorMsg.vue";
+import ErrorMsgTips from "./ErrorMsg.vue";
 import { useGetComponent } from "../components/useGetComponent";
 import { SubProps, Options } from "../../types";
 import { cmpType } from "../components";
@@ -92,7 +94,11 @@ const handleInput = (e: any) => {
   validate();
 };
 
-const { validate, errorMsg, isRequired } = useValidate(props.config, modifyValue, formData);
+const { validate, errorMsg, isRequired } = useValidate(
+  props.config,
+  modifyValue,
+  formData
+);
 
 defineExpose({
   validate,

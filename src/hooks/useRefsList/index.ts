@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { ref } from "vue";
 
 type TypeRef<T> = {
   key: string | number;
@@ -33,5 +33,5 @@ export function useRefList(cmpType: any, failCb?: any) {
     }
     return isOk;
   };
-  return { refs, getRef, validate }
+  return { refs, getRef, validate };
 }

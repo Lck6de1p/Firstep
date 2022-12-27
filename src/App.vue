@@ -7,8 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import Application from '@/components/Application/index.vue';
-
+import Application from "@/components/Application/index.vue";
 </script>
 
 <style lang="less" scoped>

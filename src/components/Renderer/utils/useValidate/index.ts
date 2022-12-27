@@ -1,20 +1,25 @@
 import { ref, unref } from "vue";
-import { SubProps, RuleRequiredType, RulePatternType, RuleType } from '../../types';
-import { useShowFormItem } from '../useShowFormItem';
+import {
+  SubProps,
+  RuleRequiredType,
+  RulePatternType,
+  RuleType,
+} from "../../types";
+import { useShowFormItem } from "../useShowFormItem";
 
 function isRuleRequiredType(rule: RuleType): rule is RuleRequiredType {
-  return (rule as RuleRequiredType).required !== undefined
+  return (rule as RuleRequiredType).required !== undefined;
 }
 
 function isRulePatternType(rule: RuleType): rule is RulePatternType {
-  return (rule as RulePatternType).pattern !== undefined
+  return (rule as RulePatternType).pattern !== undefined;
 }
 
 export function useValidate(config: SubProps, value: any, formData: any) {
   const { rules, dependence } = config;
-  const errorMsg = ref<string>('');
+  const errorMsg = ref<string>("");
   const _rules = Array.isArray(rules) ? rules : rules ? [rules] : [];
-  const isRequired = _rules.some(v => isRuleRequiredType(v));
+  const isRequired = _rules.some((v) => isRuleRequiredType(v));
 
   const validate = () => {
     if (dependence && !useShowFormItem(config, formData)) {
@@ -34,7 +39,7 @@ export function useValidate(config: SubProps, value: any, formData: any) {
   };
 
   function validateOneRule(rule: RuleType, value: any) {
-    const _value = unref(value)
+    const _value = unref(value);
     if (isRuleRequiredType(rule)) {
       if (
         (typeof _value === "string" && _value === "") ||
@@ -46,9 +51,7 @@ export function useValidate(config: SubProps, value: any, formData: any) {
         return false;
       }
     } else if (isRulePatternType(rule)) {
-      if (
-        !new RegExp(rule.pattern, "g").test(_value)
-      ) {
+      if (!new RegExp(rule.pattern, "g").test(_value)) {
         errorMsg.value = rule.message;
         return false;
       }
@@ -57,5 +60,5 @@ export function useValidate(config: SubProps, value: any, formData: any) {
     return true;
   }
 
-  return { validate, errorMsg, isRequired }
+  return { validate, errorMsg, isRequired };
 }

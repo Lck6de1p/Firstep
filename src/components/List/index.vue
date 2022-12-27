@@ -8,8 +8,8 @@
 </template>
 
 <script lang="ts" setup>
-import { h, ref } from "vue";
-import { NButton, useMessage, NDataTable } from "naive-ui";
+import { ref } from "vue";
+import { NDataTable } from "naive-ui";
 import type { DataTableColumns } from "naive-ui";
 
 type Song = {
@@ -18,11 +18,7 @@ type Song = {
   length: string;
 };
 
-const createColumns = ({
-  play,
-}: {
-  play: (row: Song) => void;
-}): DataTableColumns<Song> => {
+const createColumns = (): DataTableColumns<Song> => {
   return [
     {
       title: "id",
@@ -40,35 +36,27 @@ const createColumns = ({
       title: "gender",
       key: "gender",
     },
-  
+
     {
       title: "phone",
       key: "phone",
     },
-  
+
     {
       title: "email",
       key: "email",
     },
-  
   ];
 };
 
 type Props = {
-  data: any[]
-}
-const props = defineProps<Props>()
+  data: any[];
+};
+const props = defineProps<Props>();
 
-const message = useMessage();
-const columns = ref(
-  createColumns({
-    play(row: Song) {
-      message.info(`Play ${row.title}`);
-    },
-  })
-);
+const columns = ref(createColumns());
 
 const pagination = ref({
   pageSize: 10,
-})
+});
 </script>

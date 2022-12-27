@@ -2,7 +2,7 @@
 
 import { defineConfig } from "vite";
 import { resolve } from "path";
-import { setupVitePlugins } from './build/plugins';
+import { setupVitePlugins } from "./build/plugins";
 // https://vitejs.dev/config/
 export default defineConfig({
   test: {

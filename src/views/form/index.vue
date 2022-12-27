@@ -1,6 +1,10 @@
 <template>
   <div>
-    <Form :form-config="formConfig" :init-form-data="initFormData" @confirm="confirm" />
+    <Form
+      :form-config="formConfig"
+      :init-form-data="initFormData"
+      @confirm="confirm"
+    />
   </div>
 </template>
 
@@ -45,8 +49,8 @@ const formConfig = reactive<FormConfigType[]>([
 ]);
 
 const initFormData = ref({
-  name: 'lck'
-})
+  name: "lck",
+});
 const confirm = (e: any) => {
   console.log(e);
 };

@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { NLayout, NLayoutSider } from "naive-ui";
 import SiderMenu from "./components/menu/index.vue";
 

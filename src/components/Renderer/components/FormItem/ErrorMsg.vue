@@ -3,7 +3,6 @@
 </template>
 
 <script setup lang="ts">
-
 interface Props {
   errorMsg: string;
 }

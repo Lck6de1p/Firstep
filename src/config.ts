@@ -6,52 +6,54 @@ export const config: Config = {
     content: {
       input: {
         label: "标题",
-        type: 'input',
+        type: "input",
         value: "",
         props: {},
         rules: {
           required: true,
-          message: "请输入标题"
+          message: "请输入标题",
         },
       },
       input2: {
         label: "标题2",
-        type: 'input',
+        type: "input",
         value: "",
         props: {},
         dependence: {
-          label: 'input',
-          value: '12'
+          label: "input",
+          value: "12",
         },
-        rules: [{
-          required: true,
-          message: "请输入标题2"
-        }],
+        rules: [
+          {
+            required: true,
+            message: "请输入标题2",
+          },
+        ],
       },
       select: {
         label: "搜索",
-        type: 'select',
+        type: "select",
         value: "",
         props: {
           options: [
-            { value: 'lckTest1', label: 'lckLabel1' },
-            { value: 'lckTest2', label: 'lckLabel2' },
-            { value: 'lckTest3', label: 'lckLabel3' },
-            { value: 'lckTest4', label: 'lckLabel4' },
-          ]
+            { value: "lckTest1", label: "lckLabel1" },
+            { value: "lckTest2", label: "lckLabel2" },
+            { value: "lckTest3", label: "lckLabel3" },
+            { value: "lckTest4", label: "lckLabel4" },
+          ],
         },
       },
       checkbox: {
         label: "checkbox",
-        type: 'checkbox',
+        type: "checkbox",
         value: [],
         props: {
           options: [
-            { value: 'lckTest1', label: 'lckLabel1' },
-            { value: 'lckTest2', label: 'lckLabel2' },
-            { value: 'lckTest3', label: 'lckLabel3' },
-            { value: 'lckTest4', label: 'lckLabel4' },
-          ]
+            { value: "lckTest1", label: "lckLabel1" },
+            { value: "lckTest2", label: "lckLabel2" },
+            { value: "lckTest3", label: "lckLabel3" },
+            { value: "lckTest4", label: "lckLabel4" },
+          ],
         },
       },
     },

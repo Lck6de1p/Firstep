@@ -1,4 +1,3 @@
-// import { test, expect } from "@playwright/experimental-ct-vue";
 import { test, describe, expect } from "vitest";
 import { ref } from "vue";
 import { SubProps } from "../../types";
@@ -16,14 +15,14 @@ const config: SubProps = {
     },
     {
       pattern: new RegExp("^[0-9]*$"),
-      "message": "请填写整数"
+      message: "请填写整数",
     },
   ],
 };
 describe("useValidate", () => {
   test("isRequired", async () => {
     const formData = ref({});
-    const { validate, errorMsg, isRequired } = await useValidate(
+    const { validate, isRequired } = await useValidate(
       config,
       "123123",
       formData
