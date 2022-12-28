@@ -13,14 +13,7 @@
       :path="item.key"
       :rule="item.rules"
     >
-      <component
-        :is="useGetComponent(item.type)"
-        v-bind="item.props"
-        :value="formData[item.key]"
-        :on-input="(e:any) => handleInput(item.key ,e)"
-        :on-update:value="(e:any) => handleInput(item.key ,e)"
-      >
-      </component>
+      <form-item v-model="formData[item.key]" :item-config="item" />
     </n-form-item>
     <n-form-item label=" ">
       <n-button
@@ -40,8 +33,7 @@
 import { NForm, NFormItem, FormInst, NButton } from "naive-ui";
 import { reactive, ref, unref } from "vue";
 import { FormConfigType } from "./type";
-import { useGetComponent } from "../Renderer/components/components/useGetComponent";
-
+import FormItem from "../FormItem/index.vue";
 type Props = {
   formConfig: FormConfigType[];
   inline?: boolean;
@@ -54,10 +46,6 @@ const emit = defineEmits(["confirm"]);
 const formData = reactive<any>(
   props.initFormData ? unref(props.initFormData) : {}
 );
-
-const handleInput = (key: string, e: any) => {
-  formData[key] = e;
-};
 
 const formRef = ref<FormInst | null>(null);
 

@@ -46,6 +46,41 @@ const formConfig = reactive<FormConfigType[]>([
       trigger: ["input", "blur"],
     },
   },
+  {
+    key: "select",
+    label: "选择",
+    type: "select",
+    props: {
+      options: [
+        {
+          label: "Drive My Car",
+          value: "song1",
+        },
+        {
+          label: "Norwegian Wood",
+          value: "song2",
+        },
+      ],
+    },
+    rules: {
+      required: true,
+      message: "请选择select",
+      trigger: ["input", "blur"],
+    },
+  },
+  {
+    key: "checkbox",
+    label: "选择",
+    type: "checkbox",
+    props: {
+      options: [
+        { value: "lckTest1", label: "lckLabel1" },
+        { value: "lckTest2", label: "lckLabel2" },
+        { value: "lckTest3", label: "lckLabel3" },
+        { value: "lckTest4", label: "lckLabel4" },
+      ],
+    },
+  },
 ]);
 
 const initFormData = ref({

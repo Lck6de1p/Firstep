@@ -2,6 +2,9 @@
   "recommendations": [
     "vue.volar",
     "vue.vscode-typescript-vue-plugin",
-    "zixuanchen.vitest-explorer"
+    "zixuanchen.vitest-explorer",
+    "streetsidesoftware.code-spell-checker",
+    "dbaeumer.vscode-eslint",
+    "wayou.vscode-todo-highlight"
   ]
 }
