@@ -14,7 +14,7 @@ import { NMenu } from "naive-ui";
 import type { MenuOption } from "naive-ui";
 import { routeModuleList } from "@/router/index";
 import { RouteRecordRaw } from "vue-router";
-import { useRouterPush } from "@/hooks/router";
+import { useRouterPush } from "@/composables/router";
 const genMenu = (moduleList: RouteRecordRaw[]) => {
   const menu: MenuOption[] = [];
   for (let module of moduleList) {

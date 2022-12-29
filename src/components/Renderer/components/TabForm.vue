@@ -13,7 +13,7 @@
 import { ref } from "vue";
 import FormItem from "./FormItem/index.vue";
 import { SubProps } from "../types";
-import { useRefList } from "@/hooks/useRefsList";
+import { useRefList } from "@/composables/useRefsList";
 
 interface Props {
   config: Record<string, SubProps>;

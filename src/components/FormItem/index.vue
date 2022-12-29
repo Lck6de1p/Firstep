@@ -6,11 +6,22 @@
     :on-input="handleInput"
     :on-update:value="handleInput"
   >
+    <component
+      v-for="(item, index) in subCmpOptions.options"
+      :is="useGetComponent(subCmpOptions.type)"
+      :key="index"
+      :value="item.value"
+      :label="item.label"
+    />
   </component>
 </template>
 
 <script setup lang="ts">
-import { useGetComponent } from "./utils/useGetComponent";
+import {
+  useGetComponent,
+  useGetSubComponent,
+  useModifyProps,
+} from "@/composables/useComponentsRender";
 import { FormConfigType } from "../Form/type";
 import { computed, ref } from "vue";
 
@@ -21,12 +32,13 @@ type Props = {
 const props = defineProps<Props>();
 
 const type = ref(props.itemConfig.type);
-const modifyProps = computed(() => {
-  return props.itemConfig.props || {};
-});
+const { modifyProps } = useModifyProps(props.itemConfig);
 const value = computed(() => {
   return props.modelValue;
 });
+
+const { subCmpOptions } = useGetSubComponent(props.itemConfig);
+
 const emit = defineEmits(["update:modelValue"]);
 const handleInput = (e: any) => {
   emit("update:modelValue", e);

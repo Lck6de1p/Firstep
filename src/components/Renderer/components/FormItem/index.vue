@@ -30,12 +30,14 @@
 <script setup lang="ts">
 import { computed, inject } from "vue";
 import ErrorMsgTips from "./ErrorMsg.vue";
-import { useGetComponent } from "../components/useGetComponent";
-import { SubProps, Options } from "../../types";
-import { cmpType } from "../components";
+import { SubProps } from "../../types";
 import { useValidate } from "../../utils/useValidate";
 import { useShowFormItem } from "../../utils/useShowFormItem";
-
+import {
+  useGetComponent,
+  useGetSubComponent,
+  useModifyProps,
+} from "@/composables/useComponentsRender";
 interface Props {
   propKey: string | number;
   config: SubProps;
@@ -43,40 +45,9 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const modifyProps = computed(() => {
-  let modifyProps: Record<string, string> = {};
-  const { label } = props.config;
-  switch (props.config.type) {
-    case "input":
-      modifyProps.placeholder = `请输入${label}`;
-      break;
-    case "select":
-      modifyProps.placeholder = `请选择${label}`;
-      break;
-    default:
-      break;
-  }
-  return {
-    ...modifyProps,
-    ...props.config.props,
-  };
-});
+const { modifyProps } = useModifyProps(props.config);
 
-interface SubCmpOptions {
-  type: cmpType;
-  options: Options[];
-}
-const subCmpOptions = computed(() => {
-  const subCmpOptions: SubCmpOptions = {
-    type: "",
-    options: [],
-  };
-  if (props.config.type === "checkbox") {
-    subCmpOptions.type = "checkboxItem";
-    subCmpOptions.options = props.config.props.options;
-  }
-  return subCmpOptions;
-});
+const { subCmpOptions } = useGetSubComponent(props.config);
 
 const formData: any = inject("formData");
 
