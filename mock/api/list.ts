@@ -3,7 +3,7 @@ import type { MockMethod } from "vite-plugin-mock";
 const apis: MockMethod[] = [
   {
     url: "/mock/getList",
-    method: "get",
+    method: "post",
     response: () => {
       const data = mock({
         "list|10": [
@@ -22,7 +22,7 @@ const apis: MockMethod[] = [
       return {
         code: 200,
         message: "ok",
-        data: data.list,
+        data: { list: data.list, total: 102 },
       };
     },
   },

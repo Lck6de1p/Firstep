@@ -3,11 +3,11 @@
     ref="formRef"
     :model="formData"
     label-placement="left"
-    :inline="props.inline"
-    :label-width="150"
+    :inline="inline"
+    :label-width="labelWidth"
   >
     <n-form-item
-      v-for="item in props.formConfig"
+      v-for="item in formConfig"
       :key="item.key"
       :label="item.label"
       :path="item.key"
@@ -21,12 +21,11 @@
         attr-type="button"
         @click="handleValidate"
       >
-        验证
+        {{ searchText }}
       </n-button>
       <n-button attr-type="button" @click="handleReset"> 重置 </n-button>
     </n-form-item>
   </n-form>
-  {{ formData }}
 </template>
 
 <script setup lang="ts">
@@ -38,10 +37,16 @@ type Props = {
   formConfig: FormConfigType[];
   inline?: boolean;
   initFormData?: Record<string, any>;
+  labelWidth: number | "auto";
+  searchText: string;
 };
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  formConfig: () => [],
+  labelWidth: 150,
+  searchText: "验证",
+});
 
-const emit = defineEmits(["confirm"]);
+const emit = defineEmits(["confirm", "reset"]);
 
 const formData = reactive<any>(
   props.initFormData ? unref(props.initFormData) : {}
@@ -62,6 +67,7 @@ const handleReset = () => {
     formData[key] = null;
   }
   formRef.value?.restoreValidation();
+  emit("reset", {});
 };
 </script>
 
