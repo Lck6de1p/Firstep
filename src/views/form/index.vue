@@ -81,10 +81,27 @@ const formConfig = reactive<FormConfigType[]>([
       ],
     },
   },
+  {
+    key: "sex",
+    label: "性别",
+    type: "radio",
+    props: {
+      options: [
+        { label: "男", value: "male" },
+        { label: "女", value: "female" },
+      ],
+    },
+  },
+  {
+    key: "enable",
+    label: "启用",
+    type: "switch",
+  },
 ]);
 
 const initFormData = ref({
   name: "lck",
+  sex: "male",
 });
 const confirm = (e: any) => {
   console.log(e);

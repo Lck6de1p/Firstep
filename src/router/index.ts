@@ -41,6 +41,11 @@ const LoginRoute: RouteRecordRaw = {
   },
 };
 
+const redirectRoute: RouteRecordRaw = {
+  path: "/",
+  redirect: "/form",
+};
+
 const LayoutRoute: RouteRecordRaw = {
   path: "/layout",
   name: "Layout",
@@ -48,7 +53,7 @@ const LayoutRoute: RouteRecordRaw = {
   component: () => import("@/layout/index.vue"),
   children: sortRoutesWithChildren(routeModuleList),
 };
-const routes = [LayoutRoute, LoginRoute];
+const routes = [LayoutRoute, LoginRoute, redirectRoute];
 const router = createRouter({
   history: createWebHashHistory(),
   routes: routes,

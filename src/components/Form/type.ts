@@ -1,5 +1,5 @@
 import { FormItemRule } from "naive-ui";
-import { cmpType } from "../Renderer/components/components/index";
+import { cmpType } from "@/composables/useComponentsRender/importComponents";
 export type FormConfigType = {
   key: string;
   type: cmpType;

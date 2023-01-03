@@ -42,6 +42,10 @@ export function useGetSubComponent(config: any) {
         subCmpOptions.type = "checkboxItem";
         subCmpOptions.options = props.options;
         break;
+      case "radio":
+        subCmpOptions.type = "radioItem";
+        subCmpOptions.options = props.options;
+        break;
       default:
         break;
     }
