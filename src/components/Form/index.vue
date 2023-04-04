@@ -69,6 +69,11 @@ const handleReset = () => {
   formRef.value?.restoreValidation();
   emit("reset", {});
 };
+
+defineExpose({
+  handleValidate,
+  handleReset,
+});
 </script>
 
 <style scoped></style>
